@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ML from '../learning/learningCore.js';
+
+import ColorScheme from './colorScheme.jsx';
 const Machine = new ML();
 
 
@@ -13,6 +15,12 @@ export default class Home extends Component {
       textColor: 'white',
       rgb: {r: 'ff', g: '00', b: '00'},
       chance: 0,
+      currentColor: {
+        one: {r: 0, g: 0, b: 0},
+        two: {r: 0, g: 0, b: 0},
+        three: {r: 0, g: 0, b: 0},
+        four: {r: 0, g: 0, b: 0},
+      }
     };
     this.clickHandler = this.clickHandler.bind(this);
   }
@@ -21,7 +29,8 @@ export default class Home extends Component {
   componentWillMount(){
     let {r, g, b, rgb } = Machine.randomRGB();
     let textColor = Machine.randomText();
-    this.setState({bgColor: rgb, textColor, rgb: {r, g, b}});
+    let currentColor = Machine.randomColor();
+    this.setState({bgColor: rgb, textColor, rgb: {r, g, b}, currentColor});
   }
 
   clickHandler(event){
@@ -58,10 +67,19 @@ export default class Home extends Component {
 
   render(){
     return (
-      <div>
+      <div className="container">
         <h3 className="center-align" style={{fontFamily: 'Arial Black'}}> Black or white text?</h3>
         <h6 className="center-align"> Powered by Brain.js! </h6>
         <br />
+        <div className="row" style={{width: '800px'}}>
+      <div className="center-align">
+
+        <ColorScheme currentColor={this.state.currentColor} />
+
+        </div>
+      </div>
+        <br />
+
         <div id="example" className="center-align" style={{padding: '100px', background: this.state.bgColor, color: this.state.textColor}}>
           <table className = "striped centered">
             <thead>

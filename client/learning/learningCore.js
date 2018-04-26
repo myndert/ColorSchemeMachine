@@ -24,6 +24,15 @@ class learningCore {
     };
   }
 
+  randomColor(){
+    let one = this.randomRGB();
+    let two = this.randomRGB();
+    let three = this.randomRGB();
+    let four = this.randomRGB();
+
+    return {one, two, three, four};
+  }
+
   randomText() {
     let num = Math.round(Math.random());
     return num == 1 ? 'black' : 'white';
