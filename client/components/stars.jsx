@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import { addOrUpdateCart } from '../../store/index.js'
 // need to add prop components into ProductCardView
 import { Link } from 'react-router-dom'
+import StarRatings from 'react-star-ratings';
 
 
 
@@ -11,30 +12,34 @@ export class Stars extends Component {
 
   constructor(props){
     super(props);
-    this.setStar = this.setStar.bind(this);
+    this.state = {
+      rating: 0
+    }
+
   }
 
-  setStar(){
-    console.log('oneStar')
-  }
+  // setStar(){
+  //   console.log('oneStar')
+  // }
+
 
 
   render() {
 
 
-    const star = {
-      background: 'none',
-      border: 'none',
-      color: '#999',
-      cursor: 'pointer',
-      fontSize: '18pt',
-      margin: 0,
-      outline: 'none',
-      padding: 0,
-    }
-    const star_gold = {
-      color: 'goldenrod',
-    }
+    // const star = {
+    //   background: 'none',
+    //   border: 'none',
+    //   color: '#999',
+    //   cursor: 'pointer',
+    //   fontSize: '18pt',
+    //   margin: 0,
+    //   outline: 'none',
+    //   padding: 0,
+    // }
+    // const star_gold = {
+    //   color: 'goldenrod',
+    // }
 
 
     // stars.forEach((star, i) => {
@@ -45,15 +50,25 @@ export class Stars extends Component {
     // })
 
     // const { currentItem, deleteClickHandler, handleQtyChange } = this.props;
+    // return (
+    //   <div>
+    //   <button style={star} className="star" id="star1" onMouseEnter={() => this.setStar(0)}>★</button>
+    //   <button style={star} className="star" id="star2">★</button>
+    //   <button style={star} className="star" id="star3">★</button>
+    //   <button style={star} className="star" id="star4">★</button>
+    //   <button style={star} className="star" id="star5">★</button>
+    //   </div>
+    // );
+
     return (
-      <div>
-      <button style={star} className="star" id="star1" onMouseEnter={() => this.setStar(0)}>★</button>
-      <button style={star} className="star" id="star2">★</button>
-      <button style={star} className="star" id="star3">★</button>
-      <button style={star} className="star" id="star4">★</button>
-      <button style={star} className="star" id="star5">★</button>
-      </div>
-    );
+      <StarRatings
+      starRatedColor="gold"
+      starHoverColor="gold"
+      starDimension="40px"
+      changeRating={this.props.changeRating}
+      starSpacing="0px"
+    />
+    )
   }
 }
 

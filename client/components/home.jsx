@@ -21,9 +21,12 @@ export default class Home extends Component {
         two: {r: 0, g: 0, b: 0},
         three: {r: 0, g: 0, b: 0},
         four: {r: 0, g: 0, b: 0},
-      }
+      },
+      starRating: 0,
     };
     this.clickHandler = this.clickHandler.bind(this);
+    this.changeRating = this.changeRating.bind(this);
+    this.setNextColor = this.setNextColor.bind(this);
   }
 
 
@@ -61,8 +64,25 @@ export default class Home extends Component {
     let chance = trainResult.chance;
 
     //set change color
+
     this.setState({bgColor: rgb, textColor, rgb: {r, g, b}, chance});
 
+  }
+
+  changeRating( newRating ) {
+    console.log('newRating ', newRating)
+    this.setState({
+      starRating: newRating
+    }, () => {
+      this.setNextColor();
+    });
+  }
+
+  setNextColor(){
+  console.log(this.state.starRating);
+    let currentColor = Machine.randomColor();
+    console.log(currentColor)
+    this.setState({ currentColor });
   }
 
 
@@ -79,7 +99,7 @@ export default class Home extends Component {
 
         </div>
         </div>
-        <Stars />
+        <Stars changeRating={this.changeRating} />
         <br />
 
         <div id="example" className="center-align" style={{padding: '100px', background: this.state.bgColor, color: this.state.textColor}}>

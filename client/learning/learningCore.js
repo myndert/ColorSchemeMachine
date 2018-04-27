@@ -11,16 +11,11 @@ class learningCore {
 
 
   randomRGB() {
-    var num = Math.round(0xffffff * Math.random());
-    var r = num >> 16;
-    var g = num >> 8 & 255;
-    var b = num & 255;
+    var r = Math.floor(Math.random() * 256);
+    var g = Math.floor(Math.random() * 256);
+    var b = Math.floor(Math.random() * 256);
 
-    return {
-      r,
-      g,
-      b,
-      rgb: 'rgb(' + r + ', ' + g + ', ' + b + ')'
+    return { r, g, b, rgb: 'rgb(' + r + ', ' + g + ', ' + b + ')'
     };
   }
 
