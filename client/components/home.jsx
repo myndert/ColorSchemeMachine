@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ML from '../learning/learningCore.js';
 
 import ColorScheme from './colorScheme.jsx';
+import Stars from './stars.jsx'
 const Machine = new ML();
 
 
@@ -77,7 +78,8 @@ export default class Home extends Component {
         <ColorScheme currentColor={this.state.currentColor} />
 
         </div>
-      </div>
+        </div>
+        <Stars />
         <br />
 
         <div id="example" className="center-align" style={{padding: '100px', background: this.state.bgColor, color: this.state.textColor}}>
