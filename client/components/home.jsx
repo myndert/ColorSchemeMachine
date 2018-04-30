@@ -9,6 +9,7 @@ const Machine = new ML();
 import topScheme from './seedData.js'
 
 
+
 export default class Home extends Component {
 
   constructor(props){
@@ -31,6 +32,7 @@ export default class Home extends Component {
     this.setNextColor = this.setNextColor.bind(this);
     this.colorOnChange = this.colorOnChange.bind(this);
     this.lockClickHandler = this.lockClickHandler.bind(this);
+
   }
 
 
@@ -61,7 +63,7 @@ export default class Home extends Component {
 			return {fourIsLocked: !prevState.fourIsLocked};
     });
   }
-	}
+  }
 
   colorOnChange(evt){
     if (evt.target.id === 'one'){
@@ -148,6 +150,7 @@ export default class Home extends Component {
         twoIsLocked={this.state.twoIsLocked}
         threeIsLocked={this.state.threeIsLocked}
         fourIsLocked={this.state.fourIsLocked}
+        copyOnClick={this.copyOnClick}
         />
 
         <br />
@@ -165,7 +168,7 @@ export default class Home extends Component {
         <div className="row">
         {this.state.newColors ? this.state.newColors.map(( color ) => {
           return (
-          <div key={color.one.r.toString() + color.two.g + color.three.b} className="col m3" style={{margin: '20px'}}>
+          <div key={color.one.r.toString() + color.two.g + color.three.b + color.four.r} className="col m3" style={{margin: '20px'}}>
           <ColorPreview currentColors={color} />
           </div>
           )

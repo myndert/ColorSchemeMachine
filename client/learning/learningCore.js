@@ -123,7 +123,7 @@ class learningCore {
 
     //generate array of new colors [{input:[], output:[score]}]
 
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < 10000; i++){
 
     let input = this.randomColor(inputOne, inputTwo, inputThree, inputFour);
     let score = this.network.run(this.rgbToArray(this.rgbConverter(input)));
@@ -144,33 +144,6 @@ class learningCore {
 
     return (result)
   }
-
-  // trainBrain(inputData) {
-  //   if (this.data.length < 3){
-  //     return {color: this.randomText(), chance: 0};
-  //   }
-  //   else {
-  //   let rgb = this.rgbConverter(inputData);
-
-  //   // this.network.train(this.data, {log: true});
-  //   this.network.train(this.testData);
-  //   const result = this.network.run(rgb);
-
-  //   console.log('my result is: ', result);
-
-  //   if (result.light > result.dark){
-  //     let chance = (Math.round(result.light * 100) );
-  //     return {color: 'white', chance};
-  //   }
-  //   else {
-  //     let chance = (Math.round(result.dark * 100) );
-  //     return {color: 'black', chance};
-  //   }
-
-  //   }
-
-  // }
-
 }
 
 module.exports = learningCore;

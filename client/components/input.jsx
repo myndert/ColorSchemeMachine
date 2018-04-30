@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // need to add prop components into ProductCardView
 import { Link } from 'react-router-dom'
 import { Button, Icon, Table } from 'react-materialize'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
 
@@ -49,25 +50,34 @@ export class Input extends Component {
       <tr>
       <td>Navbar Background: </td>
       <td><input id="one" type="color" defaultValue={colorOneHex} onChange={this.props.colorOnChange} /></td>
-      <td>{colorOne}</td>
+      <td><CopyToClipboard text={colorOne}>
+      <span>{colorOne}</span>
+      </CopyToClipboard></td>
       <td><Button id="lockOne" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.oneIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
       </tr>
       <tr>
       <td>Navbar Text: </td>
       <td><input id="two" type="color" defaultValue={colorTwoHex} onChange={this.props.colorOnChange} /></td>
-      <td>{colorTwo}</td>
+      <td><CopyToClipboard text={colorTwo}>
+      <span>{colorTwo}</span>
+      </CopyToClipboard></td>
       <td><Button id="lockTwo" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.twoIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
       </tr>
       <tr>
       <td>Main Background: </td>
       <td><input id="three" type="color" defaultValue={colorThreeHex} onChange={this.props.colorOnChange} /></td>
-      <td>{colorThree}</td>
+      <td><CopyToClipboard text={colorThree}>
+      <span>{colorThree}</span>
+      </CopyToClipboard>
+      </td>
       <td><Button id="lockThree" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.threeIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
       </tr>
       <tr>
       <td>Navbar Background: </td>
       <td><input id="four" type="color" defaultValue={colorFourHex} onChange={this.props.colorOnChange} /></td>
-      <td>{colorFour}</td>
+      <td><CopyToClipboard text={colorFour}>
+      <span>{colorFour}</span>
+      </CopyToClipboard></td>
       <td><Button id="lockFour" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.fourIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
       </tr>
       </tbody>
