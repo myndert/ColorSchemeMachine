@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 // import { addOrUpdateCart } from '../../store/index.js'
 // need to add prop components into ProductCardView
 import { Link } from 'react-router-dom'
-import { Navbar, NavItem, Icon, Table } from 'react-materialize'
+import { Navbar, NavItem, Icon, Table } from 'react-materialize';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 
 
@@ -63,16 +64,24 @@ export class ColorPreview extends Component {
       <tbody>
       <tr>
       <td>Navbar Background: </td>
-      <td>{colorOne} </td></tr>
+      <td><CopyToClipboard text={colorOne}>
+      <span>{colorOne}</span>
+      </CopyToClipboard></td></tr>
       <tr>
       <td>Navbar Text: </td>
-      <td>{colorTwo} </td></tr>
+      <td><CopyToClipboard text={colorTwo}>
+      <span>{colorTwo}</span>
+      </CopyToClipboard></td></tr>
       <tr>
       <td>Main Background: </td>
-      <td>{colorThree} </td></tr>
+      <td><CopyToClipboard text={colorThree}>
+      <span>{colorThree}</span>
+      </CopyToClipboard></td></tr>
       <tr>
       <td>Main Text: </td>
-      <td>{colorFour} </td></tr>
+      <td><CopyToClipboard text={colorFour}>
+      <span>{colorFour}</span>
+      </CopyToClipboard></td></tr>
       </tbody>
       </Table>
 

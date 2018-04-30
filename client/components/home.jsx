@@ -164,8 +164,7 @@ export default class Home extends Component {
         </div>
         <br />
         <hr style={{borderColor: 'black'}} />
-
-        <div className="row">
+        <div className="row" >
         {this.state.newColors ? this.state.newColors.map(( color ) => {
           return (
           <div key={color.one.r.toString() + color.two.g + color.three.b + color.four.r} className="col m3" style={{margin: '20px'}}>
@@ -178,7 +177,6 @@ export default class Home extends Component {
         )
       }
       </div>
-
       </div>
 
     );

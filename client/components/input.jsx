@@ -44,7 +44,7 @@ export class Input extends Component {
 
 
     return (
-      <div className="container">
+      <div className="container" style={{width: '800px'}}>
       <Table className="center-align">
       <tbody>
       <tr>
@@ -53,7 +53,7 @@ export class Input extends Component {
       <td><CopyToClipboard text={colorOne}>
       <span>{colorOne}</span>
       </CopyToClipboard></td>
-      <td><Button id="lockOne" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.oneIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
+      <td><Button id="lockOne" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.oneIsLocked ? 'lock' : 'lock_open'}</Icon></Button></td>
       </tr>
       <tr>
       <td>Navbar Text: </td>
@@ -61,7 +61,7 @@ export class Input extends Component {
       <td><CopyToClipboard text={colorTwo}>
       <span>{colorTwo}</span>
       </CopyToClipboard></td>
-      <td><Button id="lockTwo" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.twoIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
+      <td><Button id="lockTwo" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.twoIsLocked ? 'lock' : 'lock_open'}</Icon></Button></td>
       </tr>
       <tr>
       <td>Main Background: </td>
@@ -70,15 +70,15 @@ export class Input extends Component {
       <span>{colorThree}</span>
       </CopyToClipboard>
       </td>
-      <td><Button id="lockThree" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.threeIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
+      <td><Button id="lockThree" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.threeIsLocked ? 'lock' : 'lock_open'}</Icon></Button></td>
       </tr>
       <tr>
-      <td>Navbar Background: </td>
+      <td>Main Text: </td>
       <td><input id="four" type="color" defaultValue={colorFourHex} onChange={this.props.colorOnChange} /></td>
       <td><CopyToClipboard text={colorFour}>
       <span>{colorFour}</span>
       </CopyToClipboard></td>
-      <td><Button id="lockFour" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.fourIsLocked ? 'lock_open' : 'lock'}</Icon></Button></td>
+      <td><Button id="lockFour" waves="light" onClick={this.props.lockClickHandler} ><Icon center>{this.props.fourIsLocked ? 'lock' : 'lock_open'}</Icon></Button></td>
       </tr>
       </tbody>
       </Table>
