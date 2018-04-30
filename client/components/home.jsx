@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import ML from '../learning/learningCore.js';
 
 import ColorScheme from './colorScheme.jsx';
+import ColorPreview from './colorPreview.jsx';
+import Input from './Input.jsx';
 import Stars from './stars.jsx'
 const Machine = new ML();
+import topScheme from './seedData.js'
 
 
 export default class Home extends Component {
@@ -12,121 +15,169 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      bgColor: '#ff0000',
-      textColor: 'white',
-      rgb: {r: 'ff', g: '00', b: '00'},
-      chance: 0,
-      currentColor: {
+      currentColors: {
         one: {r: 0, g: 0, b: 0},
         two: {r: 0, g: 0, b: 0},
         three: {r: 0, g: 0, b: 0},
         four: {r: 0, g: 0, b: 0},
       },
-      starRating: 0,
+      newColors: [],
+      oneIsLocked: false,
+      twoIsLocked: false,
+      threeIsLocked: false,
+      fourIsLocked: false,
     };
-    this.clickHandler = this.clickHandler.bind(this);
     this.changeRating = this.changeRating.bind(this);
     this.setNextColor = this.setNextColor.bind(this);
+    this.colorOnChange = this.colorOnChange.bind(this);
+    this.lockClickHandler = this.lockClickHandler.bind(this);
   }
 
 
   componentWillMount(){
-    let {r, g, b, rgb } = Machine.randomRGB();
-    let textColor = Machine.randomText();
-    let currentColor = Machine.randomColor();
-    this.setState({bgColor: rgb, textColor, rgb: {r, g, b}, currentColor});
+    Machine.setTestData(topScheme);
+    let currentColors = Machine.randomColor();
+    this.setState({currentColors});
   }
 
-  clickHandler(event){
+  lockClickHandler(evt) {
+  if ( evt.target.id === 'lockOne'){
+		this.setState(function(prevState) {
+			return {oneIsLocked: !prevState.oneIsLocked};
+    });
+  }
+  if ( evt.target.id === 'lockTwo'){
+		this.setState(function(prevState) {
+			return {twoIsLocked: !prevState.twoIsLocked};
+    });
+  }
+  if ( evt.target.id === 'lockThree'){
+		this.setState(function(prevState) {
+			return {threeIsLocked: !prevState.threeIsLocked};
+    });
+  }
+    if ( evt.target.id === 'lockFour'){
+		this.setState(function(prevState) {
+			return {fourIsLocked: !prevState.fourIsLocked};
+    });
+  }
+	}
 
-    let text = '';
-
-    if (this.state.textColor === 'white' && event.target.value === 'ok')
-    {
-        text = 'white';
+  colorOnChange(evt){
+    if (evt.target.id === 'one'){
+      let currentColors = {...this.state.currentColors}
+      currentColors.one = (this.hexToRgb(evt.target.value));
+      this.setState({currentColors});
     }
-    else if (this.state.textColor === 'white' && event.target.value === 'no'){
-        text = 'black';
-      }
-    else if (this.state.textColor === 'black' && event.target.value === 'no'){
-        text = 'white';
+    if (evt.target.id === 'two'){
+      let currentColors = {...this.state.currentColors}
+      currentColors.two = (this.hexToRgb(evt.target.value));
+      this.setState({currentColors});
     }
-      else {
-        text = 'black';
-      }
+    if (evt.target.id === 'three'){
+      let currentColors = {...this.state.currentColors}
+      currentColors.three = (this.hexToRgb(evt.target.value));
+      this.setState({currentColors});
+    }
+    if (evt.target.id === 'four'){
+      let currentColors = {...this.state.currentColors}
+      currentColors.four = (this.hexToRgb(evt.target.value));
+      this.setState({currentColors});
+    }
+  }
 
-    Machine.insertData({rgb: this.state.rgb, text});
-
-    // get color for next round
-    let {r, g, b, rgb } = Machine.randomRGB();
-    let trainResult = Machine.trainBrain({rgb: {r, g, b }});
-    let textColor = trainResult.color;
-    let chance = trainResult.chance;
-
-    //set change color
-
-    this.setState({bgColor: rgb, textColor, rgb: {r, g, b}, chance});
-
+  hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
   }
 
   changeRating( newRating ) {
-    console.log('newRating ', newRating)
-    this.setState({
-      starRating: newRating
-    }, () => {
-      this.setNextColor();
-    });
+    this.setNextColor( newRating );
   }
 
-  setNextColor(){
-  console.log(this.state.starRating);
-    let currentColor = Machine.randomColor();
-    console.log(currentColor)
-    this.setState({ currentColor });
+  setNextColor(newRating){
+
+    let arg1 = undefined;
+    let arg2 = undefined;
+    let arg3 = undefined;
+    let arg4 = undefined;
+
+    if (this.state.oneIsLocked){
+      arg1 = (this.state.currentColors.one)
+    }
+    if (this.state.twoIsLocked){
+      arg2 = (this.state.currentColors.two)
+    }
+    if (this.state.threeIsLocked){
+      arg3 = (this.state.currentColors.three)
+    }
+    if (this.state.fourIsLocked){
+      arg4 = (this.state.currentColors.four)
+    }
+
+    Machine.insertTestData(this.state.currentColors, newRating );
+
+    let newColors = Machine.brain(arg1, arg2, arg3, arg4);
+
+    let currentColors = newColors.shift();
+    this.setState({ newColors, currentColors });
   }
 
 
   render(){
+
     return (
       <div className="container">
-        <h3 className="center-align" style={{fontFamily: 'Arial Black'}}> Black or white text?</h3>
+        <h3 className="center-align" style={{fontFamily: 'Arial Black'}}> Color Theme Generator</h3>
         <h6 className="center-align"> Powered by Brain.js! </h6>
         <br />
-        <div className="row" style={{width: '800px'}}>
-      <div className="center-align">
 
-        <ColorScheme currentColor={this.state.currentColor} />
+        <ColorScheme currentColors={this.state.currentColors} />
+        <div className="center-align">
+        <br />
 
-        </div>
-        </div>
+        <Input
+        currentColors={this.state.currentColors}
+        colorOnChange={this.colorOnChange}
+        lockClickHandler={this.lockClickHandler}
+        oneIsLocked={this.state.oneIsLocked}
+        twoIsLocked={this.state.twoIsLocked}
+        threeIsLocked={this.state.threeIsLocked}
+        fourIsLocked={this.state.fourIsLocked}
+        />
+
+        <br />
+        <h5>How much will you rank this theme?</h5>
         <Stars changeRating={this.changeRating} />
-        <br />
-
-        <div id="example" className="center-align" style={{padding: '100px', background: this.state.bgColor, color: this.state.textColor}}>
-          <table className = "striped centered">
-            <thead>
-              <tr>
-                <th style={{fontSize: '26px'}}> Example Text </th>
-                <th style={{fontSize: '36px'}}> Example Text </th>
-                <th style={{fontSize: '46px'}}> Example Text </th>
-              </tr>
-            </thead>
-          </table>
         </div>
-        <br /><br />
-
         <div className="center-align">
-          <h5>How do you like the text with this background color? </h5>
-          <button className="waves-effect waves-light btn-small" onClick={this.clickHandler} value="ok"><i className ="material-icons left">thumb_up</i>I Like This</button>
-          <button className="waves-effect waves-light btn-small" style={{marginLeft: '15px'}} onClick={this.clickHandler} value="no"><i className ="material-icons right">thumb_down</i>I Hate This</button>
-        </div>
-
         <br />
-        <div className="center-align">
-          {this.state.chance !== 0 ? <div> I am {this.state.chance}% sure </div>
-        : <div />}
+        <p>This machine learns by reading your ranking for each color theme it suggested!</p>
+        <p>The recommendations will improve over time</p>
         </div>
+        <br />
+        <hr style={{borderColor: 'black'}} />
+
+        <div className="row">
+        {this.state.newColors ? this.state.newColors.map(( color ) => {
+          return (
+          <div key={color.one.r.toString() + color.two.g + color.three.b} className="col m3" style={{margin: '20px'}}>
+          <ColorPreview currentColors={color} />
+          </div>
+          )
+        })
+       : (
+          <div />
+        )
+      }
       </div>
+
+      </div>
+
     );
   }
 }

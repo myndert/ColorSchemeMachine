@@ -4,20 +4,32 @@ import { connect } from 'react-redux';
 // import { addOrUpdateCart } from '../../store/index.js'
 // need to add prop components into ProductCardView
 import { Link } from 'react-router-dom'
-import { Navbar, NavItem, Icon } from 'react-materialize'
+import { Navbar, NavItem, Icon, Table } from 'react-materialize'
 
 
 
-export class ColorScheme extends Component {
+export class ColorPreview extends Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      currentColor: {
+        one: {r: 0, g: 0, b: 0},
+        two: {r: 0, g: 0, b: 0},
+        three: {r: 0, g: 0, b: 0},
+        four: {r: 0, g: 0, b: 0},
+      }
+    };
 
+  }
+
+  componentWillMount(){
+    this.setState({currentColor: this.props.currentColors})
   }
 
   render() {
 
-    const {one, two, three, four, five} = this.props.currentColors;
+    const {one, two, three, four} = this.state.currentColor;
     const colorOne = `rgb(${one.r}, ${one.g}, ${one.b})`;
     const colorTwo = `rgb(${two.r}, ${two.g}, ${two.b})`;
     const colorThree = `rgb(${three.r}, ${three.g}, ${three.b})`;
@@ -25,12 +37,11 @@ export class ColorScheme extends Component {
 
     // const { currentItem, deleteClickHandler, handleQtyChange } = this.props;
     return (
-      <div className="container" style={{width:'800px'}}>
+      <div className="container" style={{width:'300px'}}>
       <nav style={{background: `rgb(${one.r}, ${one.g}, ${one.b})`}}>
     <div className="nav-wrapper">
       <Link to="#" className="brand-logo valign-wrapper" style={{color: colorTwo}}><i className="material-icons" style={{color: colorTwo}}>cloud</i>Logo</Link>
       <ul className="right hide-on-med-and-down">
-        <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>search</i></Link></li>
         <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>view_module</i></Link></li>
         <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>refresh</i></Link></li>
         <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>more_vert</i></Link></li>
@@ -38,16 +49,32 @@ export class ColorScheme extends Component {
       </div>
       </nav>
 
-      <div id="three" className="center-align" style={{background: `rgb(${three.r}, ${three.g}, ${three.b})`, height: '375px'}}>
+      <div id="three" className="center-align" style={{background: `rgb(${three.r}, ${three.g}, ${three.b})`, height: '250px'}}>
       <br />
-      <h3 style={{margin: 0, padding: 0, color:colorFour}}>Very Interesting Title</h3>
+      <h5 style={{margin: 0, padding: 0, color: colorFour}}>Very Interesting Title</h5>
       <br />
-      <hr style={{borderColor: colorFour}}/>
+      <hr style={{borderColor: colorFour}} />
       <br />
       <div className="container">
-      <p style={{color: colorFour}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla molestie lorem at enim pharetra, ut laoreet lorem sagittis. In egestas erat et pulvinar scelerisque. Phasellus a nibh ut nisi consectetur laoreet sed ac eros. Nam tristique diam ac enim consectetur vehicula. Nulla risus ipsum, tristique quis aliquet non, finibus vitae dui. Suspendisse potenti. Phasellus eget odio dolor. Curabitur fringilla vulputate enim vitae volutpat. Nulla pretium, lorem vel pulvinar sollicitudin, augue libero fermentum purus, at congue nibh odio in mauris. Praesent sodales dignissim felis nec facilisis. Aliquam scelerisque ornare cursus. Etiam sed est dui. Cras id est tempus, pharetra velit nec, semper orci.</p>
+      <p style={{color: colorFour}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla molestie lorem at enim pharetra, ut laoreet lorem sagittis. In egestas erat et pulvinar scelerisque.</p>
       </div>
       </div>
+      <Table className="center-align">
+      <tbody>
+      <tr>
+      <td>Navbar Background: </td>
+      <td>{colorOne} </td></tr>
+      <tr>
+      <td>Navbar Text: </td>
+      <td>{colorTwo} </td></tr>
+      <tr>
+      <td>Main Background: </td>
+      <td>{colorThree} </td></tr>
+      <tr>
+      <td>Main Text: </td>
+      <td>{colorFour} </td></tr>
+      </tbody>
+      </Table>
 
       </div>
     );
@@ -72,4 +99,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ColorScheme);
+)(ColorPreview);
