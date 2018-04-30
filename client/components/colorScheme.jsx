@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import { addOrUpdateCart } from '../../store/index.js'
 // need to add prop components into ProductCardView
 import { Link } from 'react-router-dom'
-import { Navbar, NavItem, Icon } from 'react-materialize'
+import { Navbar, NavItem, Icon, Dropdown } from 'react-materialize'
 
 
 
@@ -32,8 +32,31 @@ export class ColorScheme extends Component {
       <ul className="right hide-on-med-and-down">
         <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>search</i></Link></li>
         <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>view_module</i></Link></li>
-        <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>refresh</i></Link></li>
-        <li><Link to="#"><i className="material-icons" style={{color: colorTwo}}>more_vert</i></Link></li>
+
+        <li>
+        <Dropdown
+        trigger={
+        <a><i className="material-icons" style={{color: colorTwo}}>refresh</i></a>
+        }
+        options={{ belowOrigin: true, hover: true }}
+        >
+        <Link to={'#'} style={{background: colorTwo}}><i className="material-icons" style={{color: colorOne}}>account_box</i></Link>
+         <Link to={'#'} style={{background: colorTwo}}><i className="material-icons" style={{color: colorOne}}>add_circle</i></Link>
+         <Link to={'#'} style={{background: colorTwo}}><i className="material-icons" style={{color: colorOne}}>add_to_photo</i></Link>
+         </Dropdown>
+        </li>
+        <li>
+        <Dropdown
+        trigger={
+        <a><i className="material-icons" style={{color: colorTwo}}>more_vert</i></a>
+        }
+        options={{ belowOrigin: true, hover: true }}
+        >
+        <Link to={'#'} style={{background: colorOne}}><i className="material-icons" style={{color: colorTwo}}>account_box</i></Link>
+         <Link to={'#'} style={{background: colorOne}}><i className="material-icons" style={{color: colorTwo}}>add_circle</i></Link>
+         <Link to={'#'} style={{background: colorOne}}><i className="material-icons" style={{color: colorTwo}}>add_to_photo</i></Link>
+         </Dropdown>
+        </li>
       </ul>
       </div>
       </nav>
